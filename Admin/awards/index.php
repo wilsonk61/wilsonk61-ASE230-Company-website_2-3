@@ -1,3 +1,6 @@
+<?php 
+require_once __DIR__ . '/../../lib/csv_read_function.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +85,7 @@
 
     <!-- START SIDEBAR -->
     <div class="sidebar">
-        <h5>Admin Edit Awards</h5>
+        <h5>Admin Edit Team</h5>
 		<a href="../../Admin.php">Admin Home</a>
 		<a href="../pages/index.php">Pages</a>
         <a href="../team/index.php">Team</a>
@@ -91,7 +94,38 @@
         <a href="../contacts/index.php">Contacts</a>
     </div>
     <!-- END SIDEBAR -->
-
+    
+    <!-- START MAIN CONTENT -->
+    <div class="container" style="margin-left: 220px; margin-top: 150px;">
+		<div class="text-end mb-4">
+			<a href="create.php" class="btn btn-primary create-btn">Create</a> 
+		</div>
+		<h1> Awards </h1>
+		<?php
+			$CSVFile = 'Awards.csv';
+			$awards = readCSVFile($CSVFile);
+		?>
+		<table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>#</th>
+        			<th>Award name</th>
+        			<th>Action</th>
+        		</tr>
+        	</thead>
+            <tbody>
+            <?php foreach ($awards as $index => $award) { ?>
+            	<tr>
+            		<td><?php echo $index + 1; ?></td>
+            		<td><a href="detail.php?index=<?php echo $index ?>"><?= htmlspecialchars($award['Award']); ?></a></td>
+            		<td><a href="detail.php?index=<?php echo $index ?>" class="btn btn-warning">Detail</a></td>
+            	</tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- END MAIN CONTENT -->
+    
     <!-- javascript -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/smooth-scroll.polyfills.min.js"></script>

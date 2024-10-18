@@ -3,6 +3,29 @@ require_once 'lib/text_read_function.php';
 require_once 'lib/csv_read_function.php';
 require_once 'lib/json_read_function.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && count($_POST) > 0) {
+	$filePath = __DIR__ . '/data/Contact.json'; 
+	$JSONFile = 'Contact.json';
+	$contacts = readJSONFile($JSONFile);
+    
+    $newContact = [
+        'name' => $_POST['name'], 
+        'email' => $_POST['email'],
+        'subject' => $_POST['subject'],
+        'user_message' => $_POST['comments'], 
+    ];
+    
+    $contacts[] = $newContact;
+    
+    $jsonContent = json_encode($contacts, JSON_PRETTY_PRINT);
+    
+    file_put_contents($filePath, $jsonContent);
+    
+    header('Location: index.php');
+    exit;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -296,28 +319,27 @@ require_once 'lib/json_read_function.php';
                 </div>
                 <div class="col-lg-8">
                     <div class="custom-form mt-4 pt-4">
-                        <form method="post" name="myForm" onsubmit="return validateForm()">
-                            <p id="error-msg"></p>
+                        <form method="POST" name="myForm" action=index.php>
                             <div id="simple-msg"></div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group mt-2">
                                         <input name="name" id="name" type="text" class="form-control"
-                                            placeholder="Your name*">
+                                            placeholder="Your name*" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group mt-2">
                                         <input name="email" id="email" type="email" class="form-control"
-                                            placeholder="Your email*">
+                                            placeholder="Your email*" required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group mt-2">
-                                        <input type="text" class="form-control" id="subject"
-                                            placeholder="Your Subject.." />
+                                        <input type="text" class="form-control" id="subject" name="subject"
+                                            placeholder="Your Subject.." required>
                                     </div>
                                 </div>
                             </div>
@@ -325,7 +347,7 @@ require_once 'lib/json_read_function.php';
                                 <div class="col-lg-12">
                                     <div class="form-group mt-2">
                                         <textarea name="comments" id="comments" rows="4" class="form-control"
-                                            placeholder="Your message..."></textarea>
+                                            placeholder="Your message..." required></textarea>
                                     </div>
                                 </div>
                             </div>

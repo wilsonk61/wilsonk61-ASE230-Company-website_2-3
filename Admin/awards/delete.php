@@ -1,3 +1,28 @@
+<?php 
+require_once __DIR__ . '/../../lib/csv_read_function.php';
+
+$filePath = __DIR__ . '/../../data/Awards.csv'; 
+$CSVFile = 'Awards.csv';
+$awards = readCSVFile($CSVFile);
+
+if (isset($_GET['index'])) {
+    $index = $_GET['index'];
+}
+
+unset($awards[$index]); 
+$awards = array_values($awards); 
+
+$fp = fopen($filePath, 'w');
+fputcsv($fp, ['Year', 'Award']);
+foreach ($awards as $row) {
+    fputcsv($fp, $row);
+}
+fclose($fp);
+
+header('Location: index.php');
+exit;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +107,7 @@
 
     <!-- START SIDEBAR -->
     <div class="sidebar">
-        <h5>Admin Edit Awards</h5>
+        <h5>Admin Edit Team</h5>
 		<a href="../../Admin.php">Admin Home</a>
 		<a href="../pages/index.php">Pages</a>
         <a href="../team/index.php">Team</a>

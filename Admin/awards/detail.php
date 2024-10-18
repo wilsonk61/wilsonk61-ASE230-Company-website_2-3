@@ -1,3 +1,6 @@
+<?php 
+require_once __DIR__ . '/../../lib/csv_read_function.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +85,7 @@
 
     <!-- START SIDEBAR -->
     <div class="sidebar">
-        <h5>Admin Edit Awards</h5>
+        <h5>Admin Edit Team</h5>
 		<a href="../../Admin.php">Admin Home</a>
 		<a href="../pages/index.php">Pages</a>
         <a href="../team/index.php">Team</a>
@@ -91,6 +94,25 @@
         <a href="../contacts/index.php">Contacts</a>
     </div>
     <!-- END SIDEBAR -->
+    
+    <!-- START MAIN CONTENT -->
+    <div class="container" style="margin-left: 220px; margin-top: 150px;"> 
+	<?php
+		$CSVFile = 'Awards.csv';
+		$awards = readCSVFile($CSVFile);
+		$index = $_GET['index'];
+		$award = $awards[$index];
+	?>
+        <h1><?php echo ($award['Year']); ?></h1>
+        <p><strong>Awarded: </strong> <?php echo ($award['Award']); ?></p>
+       
+        <div class="mt-4">
+            <a href="edit.php?index=<?= $index ?>" class="btn btn-warning">Edit</a>
+            <a href="delete.php?index=<?= $index ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+			<a href="index.php" class="btn btn-primary navbar-btn btn-rounded waves-effect waves-light">Back</a>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
 
     <!-- javascript -->
     <script src="js/bootstrap.bundle.min.js"></script>

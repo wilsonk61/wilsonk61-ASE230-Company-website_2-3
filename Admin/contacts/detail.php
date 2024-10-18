@@ -1,3 +1,11 @@
+<?php 
+require_once __DIR__ . '/../../lib/json_read_function.php';
+$JSONFile = 'Contact.json';
+$contacts = readJSONFile($JSONFile);
+$index = $_GET['index'];
+$contact = $contacts[$index];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,6 +99,19 @@
         <a href="../contacts/index.php">Contacts</a>
     </div>
     <!-- END SIDEBAR -->
+    
+    <!-- START MAIN CONTENT -->
+    <div class="container" style="margin-left: 220px; margin-top: 150px;"> 
+    	<h1><?php echo ($contact['subject']); ?></h1>
+    	<p><strong>Name: </strong><?php echo ($contact['name']); ?></p>
+    	<p><strong>Email: </strong><?php echo ($contact['email']); ?></p>
+    	<p><strong>Message: </strong><?php echo ($contact['user_message']); ?></p>
+    	<div class="mt-4">
+			<a href="index.php" class="btn btn-primary navbar-btn btn-rounded waves-effect waves-light">Back</a>
+    	</div>
+    </div>
+    
+    <!-- END MAIN CONTENT -->
 
     <!-- javascript -->
     <script src="js/bootstrap.bundle.min.js"></script>

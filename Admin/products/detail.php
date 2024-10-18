@@ -101,7 +101,6 @@ $item = $items[$index];
         <a href="../contacts/index.php">Contacts</a>
     </div>
     <!-- END SIDEBAR -->
-
     <!-- START MAIN CONTENT -->
     <div class="container" style="margin-left: 220px;"> 
 	<div style="margin-top: 150px;">
@@ -124,7 +123,6 @@ $item = $items[$index];
         </div>
     </div>
     <!-- END MAIN CONTENT -->
-
     <!-- javascript -->
     <script src="../../js/bootstrap.bundle.min.js"></script>
     <script src="../../js/smooth-scroll.polyfills.min.js"></script>

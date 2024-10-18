@@ -1,3 +1,6 @@
+<?php 
+require_once __DIR__ . '/../../lib/csv_read_function.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,6 +94,26 @@
         <a href="../contacts/index.php">Contacts</a>
     </div>
     <!-- END SIDEBAR -->
+    
+    <!-- START MAIN CONTENT -->
+    <div class="container" style="margin-left: 220px; margin-top: 150px;"> 
+	<?php
+		$CSVFile = 'Team.csv';
+		$teamMembers = readCSVFile($CSVFile);
+		$index = $_GET['index'];
+		$member = $teamMembers[$index];
+	?>
+        <h1><?php echo ($member['Name']); ?></h1>
+        <p><strong>Position: </strong> <?php echo ($member['Position']); ?></p>
+		<p><strong>Description: </strong><?php echo ($member['Description']); ?></p>
+       
+        <div class="mt-4">
+            <a href="edit.php?index=<?= $index ?>" class="btn btn-warning">Edit</a>
+            <a href="delete.php?index=<?= $index ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+			<a href="index.php" class="btn btn-primary navbar-btn btn-rounded waves-effect waves-light">Back</a>
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
 
     <!-- javascript -->
     <script src="js/bootstrap.bundle.min.js"></script>
