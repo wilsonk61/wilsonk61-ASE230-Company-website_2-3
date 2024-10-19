@@ -1,3 +1,11 @@
+<?php 
+require_once __DIR__ . '/../../lib/json_read_function.php';
+
+$JSONFile = 'Contact.json';
+$contacts = readJSONFile($JSONFile);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,6 +99,32 @@
         <a href="../contacts/index.php">Contacts</a>
     </div>
     <!-- END SIDEBAR -->
+    
+    <!-- START MAIN CONTENT -->
+    
+    <div class="container" style="margin-left: 220px; margin-top: 150px;">
+		<h1> Contacts </h1>
+		<table class="table table-bordered">
+        	<thead>
+        		<tr>
+        			<th>#</th>
+        			<th>Subject</th>
+        			<th>Action</th>
+        		</tr>
+        	</thead>
+            <tbody>
+            <?php foreach ($contacts as $index => $contact) { ?>
+            	<tr>
+            		<td><?php echo $index + 1; ?></td>
+            		<td><a href="detail.php?index=<?php echo $index ?>"><?= htmlspecialchars($contact['subject']); ?></a></td>
+            		<td><a href="detail.php?index=<?php echo $index ?>" class="btn btn-warning">Detail</a></td>
+            	</tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- END MAIN CONTENT -->
 
     <!-- javascript -->
     <script src="js/bootstrap.bundle.min.js"></script>

@@ -110,10 +110,11 @@ $items = $data['keyProductsAndServices'];
     <!-- END SIDEBAR -->
 
     <!-- START MAIN CONTENT -->
-    <div class="container" style="margin-left: 220px;" style="margin-top: 220px;"> 
-        <h1 class="mt-4">Key Products and Services</h1>
-        <a href="create.php" class="btn btn-primary create-btn">Create</a> 
-
+    <div class="container" style="margin-left: 220px; margin-top: 150px;">
+		<div class="text-end mb-4">
+			<a href="create.php" class="btn btn-primary create-btn">Create</a> 
+		</div>
+		<h1> Key Products and Services </h1>
         <table class="table table-bordered">
             <thead>
                 <tr>

@@ -1,3 +1,28 @@
+<?php 
+require_once __DIR__ . '/../../lib/csv_read_function.php';
+
+$filePath = __DIR__ . '/../../data/Team.csv'; 
+$CSVFile = 'Team.csv';
+$teamMembers = readCSVFile($CSVFile);
+
+if (isset($_GET['index'])) {
+    $index = $_GET['index'];
+}
+
+unset($teamMembers[$index]); 
+$teamMembers = array_values($teamMembers); 
+
+$fp = fopen($filePath, 'w');
+fputcsv($fp, ['Name', 'Position', 'Description']);
+foreach ($teamMembers as $row) {
+    fputcsv($fp, $row);
+}
+fclose($fp);
+
+header('Location: index.php');
+exit;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
